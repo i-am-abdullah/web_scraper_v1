@@ -17,15 +17,15 @@ function isValidUrl(string) {
 }
 
 async function scrapeExternalLinks(url) {
-    console.log('\n🔍 Starting to scrape...');
-    console.log('📫 Fetching webpage content...\n');
+    console.log('\nStarting to scrape...');
+    console.log(' Fetching webpage content...\n');
 
     try {
         const response = await axios.get(url);
-        console.log('✅ Page content fetched successfully!\n');
+        console.log('Page content fetched successfully!\n');
 
         const $ = cheerio.load(response.data);
-        console.log('🔎 Extracting external links...\n');
+        console.log('Extracting external links...\n');
 
         const siteDomain = new URL(url).hostname;
 
@@ -45,7 +45,7 @@ async function scrapeExternalLinks(url) {
         });
 
         const links = Array.from(externalLinks);
-        console.log('🎉 Scraping completed!\n');
+        console.log(' Scraping completed!\n');
         console.log(`Found ${links.length} unique external links:\n`);
         
         links.forEach((link, index) => {
@@ -54,7 +54,7 @@ async function scrapeExternalLinks(url) {
 
         return links;
     } catch (error) {
-        console.error('\n❌ Error occurred while scraping:');
+        console.error('\n Error occurred while scraping:');
         console.error(error.message);
         return [];
     }
@@ -63,7 +63,7 @@ async function scrapeExternalLinks(url) {
 async function main() {
     rl.question('Please enter the website URL to scrape: ', async (url) => {
         if (!isValidUrl(url)) {
-            console.error('\n❌ Invalid URL provided. Please enter a valid URL (e.g., https://example.com)');
+            console.error('\n Invalid URL provided. Please enter a valid URL (e.g., https://example.com)');
             rl.close();
             return;
         }
@@ -74,7 +74,7 @@ async function main() {
 }
 
 rl.on('close', () => {
-    console.log('\n👋 Scraping process completed. Goodbye!');
+    console.log('\n Scraping process completed. Goodbye!');
     process.exit(0);
 });
 
